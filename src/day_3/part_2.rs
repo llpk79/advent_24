@@ -7,10 +7,10 @@ pub fn part_2() {
     let nums = Regex::new(r"(\d+),(\d+)").unwrap();
     let mut total = 0;
     let mut do_it: bool = true;
-    for (toggle,  []) in muls.captures_iter(&input).map(|c| c.extract()) {
+    for (toggle, []) in muls.captures_iter(&input).map(|c| c.extract()) {
         if toggle.contains("do") && !toggle.contains("don't") {
             do_it = true
-        } 
+        }
         if toggle.contains("don't") {
             do_it = false
         }
