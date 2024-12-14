@@ -53,4 +53,3 @@ pub fn part_2() {
     }
     println!("safe: {:?}", safe_reports);
 }
-

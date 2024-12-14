@@ -1,5 +1,5 @@
-use std::fs::read_to_string;
 use regex::Regex;
+use std::fs::read_to_string;
 
 pub fn part_1() {
     let input = read_to_string("src/day_3/input.txt").unwrap();

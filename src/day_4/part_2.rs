@@ -9,15 +9,18 @@ fn search(grid: &Vec<Vec<char>>, loc: (usize, usize)) -> i32 {
     rl.push(grid[loc.0 + 1][loc.1 + 1]);
     if (lr.contains("SM") || lr.contains("MS")) && (rl.contains("SM") || rl.contains("MS")) {
         1
-    }
-    else { 
+    } else {
         0
     }
 }
 
 pub fn part_2() {
     let input = read_to_string("src/day_4/input.txt").unwrap();
-    let grid: Vec<Vec<char>> = input.split("\n").into_iter().map(|l| l.trim().chars().collect()).collect();
+    let grid: Vec<Vec<char>> = input
+        .split("\n")
+        .into_iter()
+        .map(|l| l.trim().chars().collect())
+        .collect();
     let mut total = 0;
     for i in 1..grid.len() - 1 {
         for j in 1..grid[i].len() - 1 {
