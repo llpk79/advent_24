@@ -51,6 +51,9 @@ pub fn solve(puzzle: Vec<Vec<i32>>, start: Pos, end: Pos) -> Vec<(i32, i32)> {
                     continue;
                 }
                 visited.insert(new_pos);
+                if new_pos.value < start.value {
+                    continue;
+                }
 
                 // Make a new path with this position at the end and push it to the back of the queue.
                 let mut new_path = path.clone();
@@ -63,7 +66,7 @@ pub fn solve(puzzle: Vec<Vec<i32>>, start: Pos, end: Pos) -> Vec<(i32, i32)> {
 }
 
 pub fn solve_it() {
-    let puzzle: Vec<Vec<i32>> = vec![vec![12, 8, 13], vec![6, 15, 9], vec![10, 11, 4]];
+    let puzzle: Vec<Vec<i32>> = vec![vec![12, 8, 13], vec![6, 20, 9], vec![10, 11, 4]];
     let end_value: i32 = 0;
     let start_value: i32 = 50;
     let start = Pos {
