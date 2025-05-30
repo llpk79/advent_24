@@ -38,9 +38,9 @@ pub fn solve(puzzle: Vec<Vec<i32>>, start: Pos, end: Pos) -> Vec<(i32, i32)> {
                 if new_pos == start {
                     // Add the last stop.
                     path.push(new_pos);
-                    // Make it the expected direction.
+                    // Return the path in the expected direction.
                     path.reverse();
-                    // Remove the off puzzle position.
+                    // Remove the off-grid 'end' position.
                     path.pop();
                     // Return only the path.
                     return path.iter().map(|pos| (pos.row, pos.column)).collect();
@@ -64,14 +64,15 @@ pub fn solve(puzzle: Vec<Vec<i32>>, start: Pos, end: Pos) -> Vec<(i32, i32)> {
 }
 
 pub fn solve_it() {
-    let puzzle: Vec<Vec<i32>> = vec![vec![12, 8, 13], vec![6, 20, 9], vec![10, 11, 4]];
-    let end_value: i32 = 0;
+    let puzzle: Vec<Vec<i32>> = vec![vec![12, 8, 13], vec![6, 15, 9], vec![10, 11, 4]];
+    let target_value: i32 = 0;
     let start_value: i32 = 50;
     let start = Pos {
         row: 0,
         column: 1,
-        value: end_value,
+        value: target_value,
     };
+    // This position is off-grid as per homework illustration.
     let end = Pos {
         row: 3,
         column: 1,
