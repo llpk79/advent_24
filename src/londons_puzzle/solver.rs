@@ -12,8 +12,8 @@ pub struct Pos {
 /// We start from the finish and subtract for an easier time.
 pub fn solve(puzzle: Vec<Vec<i32>>, start: Pos, end: Pos) -> Vec<(i32, i32)> {
     // Setup initial variables.
-    let rows = puzzle.len() as i32 - 1;
-    let columns = puzzle[0].len() as i32 - 1;
+    let rows: i32 = puzzle.len() as i32 - 1;
+    let columns: i32 = puzzle[0].len() as i32 - 1;
     let mut visited: HashSet<Pos> = HashSet::new();
     let mut paths: VecDeque<Vec<Pos>> = VecDeque::new();
     paths.push_back(vec![end]);
@@ -22,9 +22,9 @@ pub fn solve(puzzle: Vec<Vec<i32>>, start: Pos, end: Pos) -> Vec<(i32, i32)> {
     while let Some(mut path) = paths.pop_front() {
         // Go up, down, left, and right from last position in the path.
         for (up_down, left_right) in [1, -1, 0, 0].iter().zip([0, 0, 1, -1].iter()) {
-            let last_pos = path.last().unwrap();
-            let new_row = last_pos.row + *up_down;
-            let new_column = last_pos.column + *left_right;
+            let last_pos: &Pos = path.last().unwrap();
+            let new_row: i32 = last_pos.row + *up_down;
+            let new_column: i32 = last_pos.column + *left_right;
 
             // Check if the new position is on the puzzle map.
             if 0 <= new_row && new_row <= rows && 0 <= new_column && new_column <= columns {
@@ -32,8 +32,7 @@ pub fn solve(puzzle: Vec<Vec<i32>>, start: Pos, end: Pos) -> Vec<(i32, i32)> {
                 let new_pos = Pos {
                     row: new_row,
                     column: new_column,
-                    value: path.last().expect("valid").value
-                        - puzzle[new_row as usize][new_column as usize],
+                    value: last_pos.value - puzzle[new_row as usize][new_column as usize],
                 };
                 // If we match our starting position and target value we did it!
                 if new_pos == start {
@@ -46,7 +45,7 @@ pub fn solve(puzzle: Vec<Vec<i32>>, start: Pos, end: Pos) -> Vec<(i32, i32)> {
                     // Return only the path.
                     return path.iter().map(|pos| (pos.row, pos.column)).collect();
                 }
-                // If we've been here, or we're below the target value, we don't need to search 
+                // If we've been here, or we're below the target value, we don't need to search
                 // this path anymore.
                 if visited.contains(&new_pos) || new_pos.value < start.value {
                     continue;
@@ -55,7 +54,7 @@ pub fn solve(puzzle: Vec<Vec<i32>>, start: Pos, end: Pos) -> Vec<(i32, i32)> {
                 visited.insert(new_pos);
 
                 // Make a new path with this position at the end and push it to the back of the queue.
-                let mut new_path = path.clone();
+                let mut new_path: Vec<Pos> = path.clone();
                 new_path.push(new_pos);
                 paths.push_back(new_path);
             }
