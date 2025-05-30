@@ -51,6 +51,8 @@ pub fn solve(puzzle: Vec<Vec<i32>>, start: Pos, end: Pos) -> Vec<(i32, i32)> {
                     continue;
                 }
                 visited.insert(new_pos);
+                
+                // If we're below the target value we don't need to search this path anymore.
                 if new_pos.value < start.value {
                     continue;
                 }
