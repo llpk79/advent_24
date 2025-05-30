@@ -46,16 +46,13 @@ pub fn solve(puzzle: Vec<Vec<i32>>, start: Pos, end: Pos) -> Vec<(i32, i32)> {
                     // Return only the path.
                     return path.iter().map(|pos| (pos.row, pos.column)).collect();
                 }
+                // If we've been here, or we're below the target value, we don't need to search 
+                // this path anymore.
+                if visited.contains(&new_pos) || new_pos.value < start.value {
+                    continue;
+                }
                 // Record our visit to this position via this path so we don't loop around.
-                if visited.contains(&new_pos) {
-                    continue;
-                }
                 visited.insert(new_pos);
-                
-                // If we're below the target value we don't need to search this path anymore.
-                if new_pos.value < start.value {
-                    continue;
-                }
 
                 // Make a new path with this position at the end and push it to the back of the queue.
                 let mut new_path = path.clone();
